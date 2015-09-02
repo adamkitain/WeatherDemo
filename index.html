@@ -18,10 +18,13 @@
       <div class="content-container row-fluid">
         <div class="sidebar span3">
           <h4>Controls</h4>
-          <span>
+          <div class="">
             <button type="button" class="btn btn-success" ng-class="{active:kmlLayers.wind}" ng-click="toggleLayer('wind')">Wind</button>
-            <input type="number" class="thresh-input" ng-change="changeLayerThresh('wind')" ng-model="kmlThreshs.wind" /> MPH
-          </span>
+            <input type="number" class="thresh-input" ng-change="drawLayer()" ng-model="kmlThreshs.wind" /> MPH
+          </div>
+          <div>
+            <input type="range" ng-model="time.position" min="0" max="600" step="15" ng-change="updateTime()" /> {{time.queryString}}
+          </div>
         </div>
         <div class="map-container span9">
           <div id="map"></div>
