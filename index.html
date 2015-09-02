@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title>IBM Severe Weather</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link href="bootstrap.min.css" rel="stylesheet" media="screen">
+    <link rel="shortcut icon" href="weather_icon.png">
+
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/maps_integration.js"></script>
+    <script src="Scripts/controller.js"></script>
+
+  </head>
+  <body ng-app="app">
+    <div class="ctrl-container" ng-controller="MainCtrl">
+
+      <div id="header">IBM Severe Weather Center</div>
+      <div class="content-container row-fluid">
+        <div class="sidebar span3">
+          <h4>Controls</h4>
+          <span>
+            <button type="button" class="btn btn-success" ng-class="{active:kmlLayers.wind}" ng-click="toggleLayer('wind')">Wind</button>
+            <input type="number" class="thresh-input" ng-change="changeLayerThresh('wind')" ng-model="kmlThreshs.wind" /> MPH
+          </span>
+        </div>
+        <div class="map-container span9">
+          <div id="map"></div>
+        </div>
+        
+      </div>  
+    </div>      
+  </body>
+</html>
