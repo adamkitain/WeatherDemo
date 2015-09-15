@@ -13,17 +13,25 @@
   </head>
   <body ng-app="app">
     <div class="ctrl-container" ng-controller="MainCtrl">
-
-      <div id="header">IBM Severe Weather Center</div>
+      <div id="header">IBM Severe Weather Center
+        <img src="weather_icon.png" style="float:center;width:65px;height:65px;">
+      </div>
       <div class="content-container row-fluid">
         <div class="sidebar span3">
-          <h4>Controls</h4>
-          <div class="">
-            <button type="button" class="btn btn-success" ng-class="{active:kmlLayers.wind}" ng-click="toggleLayer('wind')">Wind</button>
-            <input type="number" class="thresh-input" ng-change="drawLayer()" ng-model="kmlThreshs.wind" /> MPH
+          <div class="Controls">
+            <h4>Controls</h4>
+            <div class="adjust">
+              <button type="button" class="btn btn-success" ng-class="{active:kmlLayers.wind}" ng-click="toggleLayer('wind')">Wind</button>
+              <input type="number" class="thresh-input" ng-change="drawLayer()" ng-model="kmlThreshs.wind" />
+              <span class="text"> MPH</p>
+            </div>
+            <div>
+              <input type="range" ng-model="time.position" min="0" max="600" step="15" ng-change="updateTime()" /> {{time.queryString}}
+            </div>
           </div>
-          <div>
-            <input type="range" ng-model="time.position" min="0" max="600" step="15" ng-change="updateTime()" /> {{time.queryString}}
+          <hr>
+          <div class = "Dashboard">
+            <h4>Dashboard</h4>
           </div>
         </div>
         <div class="map-container span9">

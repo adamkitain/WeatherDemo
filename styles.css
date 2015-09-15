@@ -5,8 +5,8 @@ html, body {
 }
 
 .ctrl-container {
-	padding:10px;
-	height:90%;
+	padding: 10px;
+	height:80%;
 }
 
 .content-container {
@@ -16,7 +16,10 @@ html, body {
 .sidebar {
 	height:100%;
 	border: 1px dashed #aaa;
-	padding: 5px;
+	padding: 20px;
+	padding-top: 5px;
+	color: white;
+	background-color: #3d3737;
 }
 
 .map-container {
@@ -25,20 +28,36 @@ html, body {
 
 #header{
 	width: 100%;
-	height: 40px;
-	line-height: 40px;
+	height: 80px;
+	line-height: 80px;
 	text-align: center;
-	font-size: 24px;
+	font-size: 32px;
 	font-weight: bold;
+	background-color: #dbdcff;
+	margin-bottom: 10px;
 }
 
 #map {
 	height: 100%;
+	align: right;
 }
 
 
 /****CONTROLLER *****/
 
 .thresh-input {
-	width:50px;
+	width: 50px;
+}
+
+.adjust button {
+  	float: left;
+  	margin-right: 5px;
+}
+
+.adjust input {
+	margin-right 5px;
+}
+
+.text {
+	vertical-align: super;
 }
