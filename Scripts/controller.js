@@ -28,8 +28,8 @@ angular.module('app', [])
       $scope.time.queryString = $scope.time.queryTime.toISOString().substr(0,$scope.time.queryTime.toISOString().length - 5);
 
       $scope.map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 32.82, lng: -96.73},
-        zoom: 11,
+        center: {lat: 39.11, lng: -77.68},
+        zoom: 9,
         maxZoom: 14
       });
 
