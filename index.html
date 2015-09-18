@@ -28,12 +28,16 @@
           <div class="Controls">
             <h4>Controls</h4>
             <div class="adjust">
-              <button type="button" class="btn btn-success" ng-class="{active:kmlLayers.snow}" ng-click="toggleLayer('snow')">Snow</button>
-              <input type="number" class="thresh-input" ng-change="drawLayer()" ng-model="kmlThreshs.snow" />
+              <button type="button" class="btn btn-success" ng-class="{active:kmlLayers.wind}" ng-click="toggleLayer('wind')">Wind</button>
+              <input type="number" class="thresh-input" ng-change="drawLayer()" ng-model="kmlThreshs.wind" />
               <span class="text"> MPH</p>
             </div>
+            <div class="adjust">
+              <button type="button" class="btn btn-danger" ng-class="{active:kmlLayers.snow}" ng-click="toggleLayer('snow')">Snow</button>
+              
+            </div>
             <div>
-              <input type="range" ng-model="time.position" min="0" max="24" step="1" ng-change="updateTime()" /> {{time.queryString}}
+              <input type="range" ng-model="time.position" min="0" max="19" step="1" ng-change="updateTime()" /> {{time.queryString}}
             </div>
             <div>
               <img class="media-object"  src="images/play.jpg" height="40px" width="40px" ng-click="streamPlay()" ng-hide="isStreaming">
@@ -109,7 +113,7 @@
         </div>
         <div class="map-container span9">
           <div id="map"></div>
-          <img src="Images/legend.png" style="position:absolute;top:10px;right:10px;width:120px;height:168px;opacity:0.9;">
+          <img ng-show="kmlLayers.snow" src="Images/legend.png" style="position:absolute;top:10px;right:10px;width:120px;height:168px;opacity:0.9;">
         </div>
         
       </div>  

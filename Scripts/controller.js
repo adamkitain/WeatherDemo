@@ -3,6 +3,7 @@ angular.module('app', [])
   .controller('MainCtrl', ['$scope',
     function($scope) {
       $scope.kmlLayers = {
+        wind: false,
         snow: false
       };
 
@@ -13,18 +14,18 @@ angular.module('app', [])
       };
 
       $scope.kmlThreshs = {
-        snow: 5
+        wind: 5
       }
 
       var kmls = {};
 
       $scope.time = {
-        now: new Date(2015, 9, 21, 0,0,0,0),
-        position: 5,
-        queryTime: null,
+        now: new Date(2015, 8, 21, 0,0,0,0),
+        position: 0,
+        queryTime: new Date(),
         queryString: ""
       };
-      $scope.time.queryTime = $scope.time.now;
+      $scope.time.queryTime.setTime($scope.time.now.getTime());
       $scope.time.queryString = $scope.time.queryTime.toISOString().substr(0,$scope.time.queryTime.toISOString().length - 5);
 
       $scope.map = new google.maps.Map(document.getElementById('map'), {
@@ -65,15 +66,15 @@ angular.module('app', [])
         })
       }
 
-      //$scope.map.addListener('idle', setLayers);
+      $scope.map.addListener('idle', setLayers);
 
       var layers = new Array(4);
       for (var i = 0; i < 4; i++){
-        layers[i] = new Array(24);
+        layers[i] = new Array(19);
       }
 
       for (var i=0; i < 4; i++) {
-        for (var j=0; j < 24; j++) {
+        for (var j=0; j < 19; j++) {
           layers[i][j] = new google.maps.KmlLayer({
             url: "https://sites.google.com/site/weatherdemo135/kml-files/rain_time_"+j+"_thresh_"+i+".kml",
             map: null,
@@ -85,9 +86,24 @@ angular.module('app', [])
       drawMarkers();
 
       function setLayers() {
-        console.log("position: ", $scope.time.position);
+        //WIND LAYER 
+        var bounds = $scope.map.getBounds();
+        mapWindow.longleft = bounds.Ga.j-0.5;
+        mapWindow.longright = bounds.Ga.H+0.5;
+        mapWindow.latupper = bounds.Ka.j+0.5;
+        mapWindow.latlower = bounds.Ka.H-0.5;
+        mapWindow.levelofdetail = Math.abs(mapWindow.longleft-mapWindow.longright)/800;
+
+        windLayer.url = getURL();
+        windLayer.setMap(null);
+        if($scope.kmlLayers.wind) {
+          console.log("getting here!", getURL());
+          windLayer.setMap($scope.map); 
+        };
+
+        //SNOW LAYER
         for(var i = 0; i < 4; i++){
-          for (var j = 0; j < 24; j++) {
+          for (var j = 0; j < 19; j++) {
             layers[i][j].setMap(null);
           }
         }
@@ -100,24 +116,24 @@ angular.module('app', [])
 
       
 
-      var snowLayer = new google.maps.KmlLayer({
+      var windLayer = new google.maps.KmlLayer({
         url: getURL(),
         map: null,
         preserveViewport: true
       });
 
       $scope.drawLayer = function () {
-        snowLayer.setMap(null);
-        snowLayer.url = getURL();
-        if($scope.kmlLayers.snow) { snowLayer.setMap($scope.map);}
+        windLayer.setMap(null);
+        windLayer.url = getURL();
+        if($scope.kmlLayers.wind) { windLayer.setMap($scope.map);}
       }
 
       $scope.toggleLayer = function(layer) {
         $scope.kmlLayers[layer] = !$scope.kmlLayers[layer];
-        // if($scope.kmlLayers.snow) {
-        //   snowLayer.setMap($scope.map);
+        // if($scope.kmlLayers.wind) {
+        //   windLayer.setMap($scope.map);
         // } else {
-        //   snowLayer.setMap(null);
+        //   windLayer.setMap(null);
         // }
         setLayers();
       };
@@ -132,7 +148,7 @@ angular.module('app', [])
       }
 
       function getURL() {
-        return "http://datacloud.wxc.com/?passkey=2a1f6d0b35ebb3bb0f100e3a05acd7ed&vs=1.0&datatype=forecast&format=kml&comparison=greaterthan&threshold="+$scope.kmlThreshs.snow+"&type=shape&lonleft=" + mapWindow.longleft + "&lonright=" + mapWindow.longright + "&latupper="+mapWindow.latupper+"&latlower="+mapWindow.latlower+"&var=accumraintotal&time="+$scope.time.queryString+"&polycolor=0:153:0:100&linecolor=50:200:50:0&levelofdetail="+mapWindow.levelofdetail;
+        return "http://datacloud.wxc.com/?passkey=2a1f6d0b35ebb3bb0f100e3a05acd7ed&vs=1.0&datatype=forecast&format=kml&comparison=greaterthan&threshold="+$scope.kmlThreshs.wind+"&type=shape&lonleft=" + mapWindow.longleft + "&lonright=" + mapWindow.longright + "&latupper="+mapWindow.latupper+"&latlower="+mapWindow.latlower+"&var=WindSpeed_10m&time="+$scope.time.queryString+"&polycolor=0:153:0:100&linecolor=50:200:50:0&levelofdetail="+mapWindow.levelofdetail;
       }
 
       $scope.streamPlay = function (weather) {
