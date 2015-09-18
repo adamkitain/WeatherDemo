@@ -33,7 +33,7 @@
               <span class="text"> MPH</p>
             </div>
             <div>
-              <input type="range" ng-model="time.position" min="0" max="600" step="15" ng-change="updateTime()" /> {{time.queryString}}
+              <input type="range" ng-model="time.position" min="0" max="24" step="1" ng-change="updateTime()" /> {{time.queryString}}
             </div>
             <div>
               <img class="media-object"  src="images/play.jpg" height="40px" width="40px" ng-click="streamPlay()" ng-hide="isStreaming">

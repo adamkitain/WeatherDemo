@@ -31,7 +31,7 @@ for i,thres in enumerate(threshold_range):
         url = url_head + threshold_head + thres + poly_color_head + thres_colors[i] + line_color_head + thres_colors[i] + "&time=" + time.isoformat()
         print timecount, i
         filestring = "KML files/rain_"  + "time_" + str(timecount) + "_thresh_" + str(i) + ".kml"
-        urllib.urlretrieve (url, filestring)
+        #urllib.urlretrieve (url, filestring)
         time = time + delta
-        print time
+        print url
         timecount = timecount + 1

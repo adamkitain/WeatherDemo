@@ -35,17 +35,35 @@ angular.module('app', [])
 
       $scope.map.addListener('idle', setLayers);
 
-      function setLayers() {
-        var bounds = $scope.map.getBounds();
-        mapWindow.longleft = bounds.Ga.j-0.5;
-        mapWindow.longright = bounds.Ga.H+0.5;
-        mapWindow.latupper = bounds.Ka.j+0.5;
-        mapWindow.latlower = bounds.Ka.H-0.5;
-        mapWindow.levelofdetail = Math.abs(mapWindow.longleft-mapWindow.longright)/800;
+      var layers = new Array(4);
+      for (var i = 0; i < 4; i++){
+        layers[i] = new Array(24);
+      }
 
-        windLayer.url = getURL();
-        windLayer.setMap(null);
-        if($scope.kmlLayers.wind) {windLayer.setMap($scope.map) };
+      for (var i=0; i < 4; i++) {
+        for (var j=0; j < 24; j++) {
+          layers[i][j] = new google.maps.KmlLayer({
+            url: "KML files/rain_time_1_thresh_1.kml",
+            map: null,
+            preserveViewport: true
+          });
+        }
+      }
+
+      layers[1][1].setMap($scope.map);
+
+      console.log(layers[1][1]);
+
+      function setLayers() {
+        // console.log("here");
+        // for(var i = 0; i < 4; i++){
+        //   for (var j = 0; j < 24; j++) {
+        //     layers[i][j].setMap(null);
+        //   }
+        // }
+        // for(var i = 0; i < 4; i++) {
+        //   layers[i][$scope.time.position].setMap($scope.map);
+        // } 
       }
 
       
