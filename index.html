@@ -36,7 +36,7 @@
               <span class="text"> MPH</p>
             </div>
             <div class="adjust">
-              <button type="button" class="btn btn-danger" ng-class="{active:kmlLayers.snow}" ng-click="toggleLayer('snow')">Snow</button>
+              <button type="button" class="btn btn-info" ng-class="{active:kmlLayers.snow}" ng-click="toggleLayer('snow')">Snow</button>
               
             </div>
             <div>
@@ -78,14 +78,14 @@
                 <td>7.3 in</td>
               </tr>
             </table>
-
             <br>
             <div>
               <p><b>Max Snowfall:</b> Lowes Island, VA (8.5 in)</p>
               <p><b>Risk Index:</b> 63%</p>
               <p><b>Recommendation: </b><mark><strong>Close schools</strong></mark></p>
             </div>
-
+            <br><br>
+            <button type="button" class="btn btn-danger" ng-click="sendAlert()" style = "margin-left:80px">Send alert notification</button>
           </div>
         </div>
         <div class="map-container span9">

@@ -148,6 +148,10 @@ angular.module('app', [])
         setLayers();
       }
 
+      $scope.sendAlert = function() {
+        confirm("Are you sure you would like to send an alert?")
+      }
+
       function getURL() {
         return "http://datacloud.wxc.com/?passkey=2a1f6d0b35ebb3bb0f100e3a05acd7ed&vs=1.0&datatype=forecast&format=kml&comparison=greaterthan&threshold="+$scope.kmlThreshs.wind+"&type=shape&lonleft=" + mapWindow.longleft + "&lonright=" + mapWindow.longright + "&latupper="+mapWindow.latupper+"&latlower="+mapWindow.latlower+"&var=WindSpeed_10m&time="+$scope.time.queryString+"&polycolor=0:153:0:100&linecolor=50:200:50:0&levelofdetail="+mapWindow.levelofdetail;
       }
@@ -164,7 +168,7 @@ angular.module('app', [])
                 $scope.time.position = 1
               };
               timeout(i);
-          }, 500);
+          }, 900);
       }
 
       $scope.streamPlay = function () {
