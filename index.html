@@ -26,7 +26,10 @@
       <div class="content-container row-fluid">
         <div class="sidebar span3">
           <div class="Controls">
-            <h4>Controls</h4>
+            <h4>Controls              
+              <img class="media-object"  src="images/play.jpg" height="40px" width="40px" ng-click="streamPlay()" ng-hide="isStreaming">
+              <img class="media-object"  src="images/pause.jpg" height="40px" width="40px" ng-click="streamPause()  " ng-show="isStreaming">
+            </h4>
             <div class="adjust">
               <button type="button" class="btn btn-success" ng-class="{active:kmlLayers.wind}" ng-click="toggleLayer('wind')">Wind</button>
               <input type="number" class="thresh-input" ng-change="drawLayer()" ng-model="kmlThreshs.wind" />
@@ -37,39 +40,12 @@
               
             </div>
             <div>
-              <input type="range" ng-model="time.position" min="0" max="19" step="1" ng-change="updateTime()" /> {{time.queryString}}
-            </div>
-            <div>
-              <img class="media-object"  src="images/play.jpg" height="40px" width="40px" ng-click="streamPlay()" ng-hide="isStreaming">
-              <img class="media-object"  src="images/pause.jpg" height="40px" width="40px" ng-click="streamPause()  " ng-show="isStreaming">
+              <input type="range" ng-model="time.position" min="0" max="18" step="1" ng-change="updateTime()" /> {{time.queryString}}
             </div>
           </div>
           <hr>
           <div class = "Dashboard">
             <h4>Dashboard</h4>
-            <style>
-            table {
-                width:100%;
-            }
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-            }
-            th, td {
-                padding: 5px;
-                text-align: left;
-            }
-            table#t01 tr:nth-child(even) {
-                background-color: #eee;
-            }
-            table#t01 tr:nth-child(odd) {
-               background-color:#fff;
-            }
-            table#t01 th  {
-                background-color: black;
-                color: white;
-            }
-            </style>
             <table id="t01" style="color:black">
               <tr>
                 <th>Location</th>
@@ -105,8 +81,9 @@
 
             <br>
             <div>
-              <p><b>Risk Index: 53%</b></p>
-              <p><b>Recommendation: Close</b></p>
+              <p><b>Max Snowfall:</b> Lowes Island, VA (8.5 in)</p>
+              <p><b>Risk Index:</b> 63%</p>
+              <p><b>Recommendation: </b><mark><strong>Close schools</strong></mark></p>
             </div>
 
           </div>

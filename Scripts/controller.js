@@ -20,7 +20,7 @@ angular.module('app', [])
       var kmls = {};
 
       $scope.time = {
-        now: new Date(2015, 8, 21, 0,0,0,0),
+        now: new Date(2015, 8, 21, 0, 0, 0, 0),
         position: 0,
         queryTime: new Date(),
         queryString: ""
@@ -101,7 +101,7 @@ angular.module('app', [])
           windLayer.setMap($scope.map); 
         };
 
-        //SNOW LAYER
+        // SNOW LAYER
         for(var i = 0; i < 4; i++){
           for (var j = 0; j < 19; j++) {
             layers[i][j].setMap(null);
@@ -144,6 +144,7 @@ angular.module('app', [])
         // $scope.time.queryString = $scope.time.queryTime.toISOString().substr(0,$scope.time.queryTime.toISOString().length - 5);
         // $scope.drawLayer();
         $scope.time.position = parseInt($scope.time.position);
+        console.log($scope.time.position)
         setLayers();
       }
 
@@ -151,20 +152,29 @@ angular.module('app', [])
         return "http://datacloud.wxc.com/?passkey=2a1f6d0b35ebb3bb0f100e3a05acd7ed&vs=1.0&datatype=forecast&format=kml&comparison=greaterthan&threshold="+$scope.kmlThreshs.wind+"&type=shape&lonleft=" + mapWindow.longleft + "&lonright=" + mapWindow.longright + "&latupper="+mapWindow.latupper+"&latlower="+mapWindow.latlower+"&var=WindSpeed_10m&time="+$scope.time.queryString+"&polycolor=0:153:0:100&linecolor=50:200:50:0&levelofdetail="+mapWindow.levelofdetail;
       }
 
-      $scope.streamPlay = function (weather) {
-	    console.log("success!");
-	    // SC.stream(stream_url, function(sound){
-	    //   $scope.weather = weather;
-	    //   // weather.play();
-	    // });
+      function timeout(i) {
+          setTimeout(function () {
+              setLayers();
+              $scope.time.position = $scope.time.position + 1;
+              console.log(i);
+              if ($scope.time.position == 99) {
+                return;
+              };
+              if ($scope.time.position == 19) {
+                $scope.time.position = 1
+              };
+              timeout(i);
+          }, 500);
+      }
 
+      $scope.streamPlay = function () {
+        $scope.time.position = 4
+          timeout(i)
 	    $scope.isStreaming = true;
 	}
 
-		$scope.streamPause = function (weather) {
-	    // weather.pause()
-	    console.log("success!")
-
+		$scope.streamPause = function () {
+	    $scope.time.position = 99
 	    $scope.isStreaming = false;
 	}
       
