@@ -28,8 +28,8 @@
           <div class="Controls">
             <h4>Controls</h4>
             <div class="adjust">
-              <button type="button" class="btn btn-success" ng-class="{active:kmlLayers.wind}" ng-click="toggleLayer('wind')">Wind</button>
-              <input type="number" class="thresh-input" ng-change="drawLayer()" ng-model="kmlThreshs.wind" />
+              <button type="button" class="btn btn-success" ng-class="{active:kmlLayers.snow}" ng-click="toggleLayer('snow')">Snow</button>
+              <input type="number" class="thresh-input" ng-change="drawLayer()" ng-model="kmlThreshs.snow" />
               <span class="text"> MPH</p>
             </div>
             <div>
@@ -37,17 +37,79 @@
             </div>
             <div>
               <img class="media-object"  src="images/play.jpg" height="40px" width="40px" ng-click="streamPlay()" ng-hide="isStreaming">
-              <img class="media-object"  src="images/pause.jpg" height="40px" width="40px" ng-click="streamPause()" ng-show="isStreaming">
+              <img class="media-object"  src="images/pause.jpg" height="40px" width="40px" ng-click="streamPause()  " ng-show="isStreaming">
             </div>
           </div>
           <hr>
           <div class = "Dashboard">
             <h4>Dashboard</h4>
-          </div>
+            <style>
+            table {
+                width:100%;
+            }
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 5px;
+                text-align: left;
+            }
+            table#t01 tr:nth-child(even) {
+                background-color: #eee;
+            }
+            table#t01 tr:nth-child(odd) {
+               background-color:#fff;
+            }
+            table#t01 th  {
+                background-color: black;
+                color: white;
+            }
+            </style>
+            <table id="t01" style="color:black">
+              <tr>
+                <th>Location</th>
+                <th>Temperature</th>    
+                <th>Snowfall</th>
+              </tr>
+              <tr>
+                <td>39.268, -77.636</td>
+                <td>32 °F</td>    
+                <td>5.4 in</td>
+              </tr>
+              <tr>
+                <td>39.001, -77.789</td>
+                <td>31 °F</td>    
+                <td>6.8 in</td>
+              </tr>
+              <tr>
+                <td>39.041, -77.353</td>
+                <td>32 °F</td>    
+                <td>8.5 in</td>
+              </tr>
+              <tr>
+                <td>39.001, -77.789</td>
+                <td>31 °F</td>    
+                <td>6.8 in</td>
+              </tr>
+              <tr>
+                <td>39.110, -77.582</td>
+                <td>33 °F</td>    
+                <td>7.3 in</td>
+              </tr>
+            </table>
 
+            <br>
+            <div>
+              <p><b>Risk Index: 53%</b></p>
+              <p><b>Recommendation: Close</b></p>
+            </div>
+
+          </div>
         </div>
         <div class="map-container span9">
           <div id="map"></div>
+          <img src="Images/legend.png" style="position:absolute;top:10px;right:10px;width:120px;height:168px;opacity:0.9;">
         </div>
         
       </div>  

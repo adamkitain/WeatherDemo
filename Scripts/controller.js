@@ -3,7 +3,7 @@ angular.module('app', [])
   .controller('MainCtrl', ['$scope',
     function($scope) {
       $scope.kmlLayers = {
-        wind: false
+        snow: false
       };
 
       var mapWindow = {
@@ -13,7 +13,7 @@ angular.module('app', [])
       };
 
       $scope.kmlThreshs = {
-        wind: 5
+        snow: 5
       }
 
       var kmls = {};
@@ -34,18 +34,22 @@ angular.module('app', [])
       });
 
       var schoolList = [
-        {lat: 38, lng: -75.5, img: 'images/school2.png'},
-        {lat: 39, lng: -78, img: 'images/school2.png'},
-        {lat: 37.8, lng: -75, img: 'images/school2.png'},
-        {lat: 38.7, lng: -74, img: 'images/school2.png'},
-        {lat: 39.2, lng: -73, img: 'images/school2.png'},
-        {lat: 39.6, lng: -78, img: 'images/school2.png'},
-        {lat: 38.3, lng: -79, img: 'images/school2.png'},
-        {lat: 40.1, lng: -78.5, img: 'images/school2.png'},
-        {lat: 37.3, lng: -74.8, img: 'images/school2.png'},
-        {lat: 38.7, lng: -78, img: 'images/school2.png'},
-        {lat: 40.3, lng: -79.2, img: 'images/school2.png'},
-        {lat: 38.1, lng: -76, img: 'images/school2.png'}
+        {lat: 38.992, lng: -77.531, img: 'images/school2.png'},
+        {lat: 39.091, lng: -77.492, img: 'images/school2.png'},
+        {lat: 39.128, lng: -77.707, img: 'images/school2.png'},
+        {lat: 39.015, lng: -77.515, img: 'images/school2.png'},
+        {lat: 38.974, lng: -77.645, img: 'images/school2.png'},
+        {lat: 39.123, lng: -77.535, img: 'images/school2.png'},
+        {lat: 39.056, lng: -77.409, img: 'images/school2.png'},
+        {lat: 39.001, lng: -77.789, img: 'images/school2.png'},
+        {lat: 39.110, lng: -77.582, img: 'images/school2.png'},
+        {lat: 39.268, lng: -77.636, img: 'images/school2.png'},
+        {lat: 39.198, lng: -77.720, img: 'images/school2.png'},
+        {lat: 38.912, lng: -77.556, img: 'images/school2.png'},
+        {lat: 39.013, lng: -77.401, img: 'images/school2.png'},
+        {lat: 39.041, lng: -77.353, img: 'images/school2.png'},
+        {lat: 39.212, lng: -77.534, img: 'images/school2.png'},
+        {lat: 39.054, lng: -77.478, img: 'images/school2.png'}
       ];
 
       var markers = [];
@@ -87,7 +91,7 @@ angular.module('app', [])
             layers[i][j].setMap(null);
           }
         }
-        if($scope.kmlLayers.wind) {
+        if($scope.kmlLayers.snow) {
           for(var i = 0; i < 4; i++) {
             layers[i][$scope.time.position].setMap($scope.map);
           }
@@ -96,24 +100,24 @@ angular.module('app', [])
 
       
 
-      var windLayer = new google.maps.KmlLayer({
+      var snowLayer = new google.maps.KmlLayer({
         url: getURL(),
         map: null,
         preserveViewport: true
       });
 
       $scope.drawLayer = function () {
-        windLayer.setMap(null);
-        windLayer.url = getURL();
-        if($scope.kmlLayers.wind) { windLayer.setMap($scope.map);}
+        snowLayer.setMap(null);
+        snowLayer.url = getURL();
+        if($scope.kmlLayers.snow) { snowLayer.setMap($scope.map);}
       }
 
       $scope.toggleLayer = function(layer) {
         $scope.kmlLayers[layer] = !$scope.kmlLayers[layer];
-        // if($scope.kmlLayers.wind) {
-        //   windLayer.setMap($scope.map);
+        // if($scope.kmlLayers.snow) {
+        //   snowLayer.setMap($scope.map);
         // } else {
-        //   windLayer.setMap(null);
+        //   snowLayer.setMap(null);
         // }
         setLayers();
       };
@@ -128,7 +132,7 @@ angular.module('app', [])
       }
 
       function getURL() {
-        return "http://datacloud.wxc.com/?passkey=2a1f6d0b35ebb3bb0f100e3a05acd7ed&vs=1.0&datatype=forecast&format=kml&comparison=greaterthan&threshold="+$scope.kmlThreshs.wind+"&type=shape&lonleft=" + mapWindow.longleft + "&lonright=" + mapWindow.longright + "&latupper="+mapWindow.latupper+"&latlower="+mapWindow.latlower+"&var=accumraintotal&time="+$scope.time.queryString+"&polycolor=0:153:0:100&linecolor=50:200:50:0&levelofdetail="+mapWindow.levelofdetail;
+        return "http://datacloud.wxc.com/?passkey=2a1f6d0b35ebb3bb0f100e3a05acd7ed&vs=1.0&datatype=forecast&format=kml&comparison=greaterthan&threshold="+$scope.kmlThreshs.snow+"&type=shape&lonleft=" + mapWindow.longleft + "&lonright=" + mapWindow.longright + "&latupper="+mapWindow.latupper+"&latlower="+mapWindow.latlower+"&var=accumraintotal&time="+$scope.time.queryString+"&polycolor=0:153:0:100&linecolor=50:200:50:0&levelofdetail="+mapWindow.levelofdetail;
       }
 
       $scope.streamPlay = function (weather) {
